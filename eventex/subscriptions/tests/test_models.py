@@ -24,6 +24,9 @@ class SubsctiptionTest(TestCase):
         self.obj.save()
         self.assertEqual(1, self.obj.pk)
 
+    def test_unicode(self):
+        self.assertEqual(u'Joaozinho da Silva', unicode(self.obj))
+
 class SubscriptionUniqueTest(TestCase):
     def setUp(self):
         Subscription.objects.create(
@@ -38,6 +41,16 @@ class SubscriptionUniqueTest(TestCase):
         subscription = Subscription(
             name='Joaozinho da Silva', 
             cpf='12345678901',
+            email='mail@example.com', 
+            phone='12-20901223'
+        )
+        self.assertRaises(IntegrityError, subscription.save)
+
+    def test_is_email_unique(self):
+        'Email must be unique'
+        subscription = Subscription(
+            name='Joaozinho da Silva', 
+            cpf='00000000009',
             email='mail@example.com', 
             phone='12-20901223'
         )
