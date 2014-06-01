@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="inner cover">
+    <h1 class="cover-heading">Parabéns {{ subscription.name }},</h1>
+    <p class="lead">
+        Sua inscrição foi realizada em 
+        {{ subscription.created_at|date:"d/m/Y" }}.
+    </p>
+    <p class="lead">
+        Em breve, entraremos em contato pelo
+        {% if subscription.phone %}
+            telefone {{ subscription.phone }}
+        {% else %}
+            e-mail {{ subscription.email }}
+        {% endif %}
+    </p>
+<div class="inner cover">
+{% endblock content %}
